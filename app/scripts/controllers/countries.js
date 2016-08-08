@@ -2,16 +2,25 @@
 
 /**
  * @ngdoc function
- * @name angularCountriesApp.controller:MainCtrl
+ * @name angularCountriesApp.controller:CountriesCtrl
  * @description
- * # MainCtrl
+ * # CountriesCtrl
  * Controller of the angularCountriesApp
  */
 angular.module('angularCountriesApp')
-  .controller('CountriesCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('CountriesCtrl', ['$scope', 'CountriesApi','$log', 'COUNTRIES_REST_ENDPOINT',
+    function($scope, CountriesApi, $log, COUNTRIES_REST_ENDPOINT) {
+    CountriesApi.getAllCountries().then(
+      function(response) {
+        $scope.countries = response.data;
+      },
+      function(error) {
+        $log.error('An error occured fetching data from ',
+          COUNTRIES_REST_ENDPOINT,
+          error
+        );
+      }
+    );
+
+
+  }]);
