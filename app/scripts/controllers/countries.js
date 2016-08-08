@@ -8,7 +8,7 @@
  * Controller of the angularCountriesApp
  */
 angular.module('angularCountriesApp')
-  .controller('MainCtrl', function () {
+  .controller('CountriesCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
