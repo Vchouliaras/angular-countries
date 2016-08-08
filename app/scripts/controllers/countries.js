@@ -8,10 +8,8 @@
  * Controller of the angularCountriesApp
  */
 angular.module('angularCountriesApp')
-  .controller('CountriesCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('CountriesCtrl', ['CountriesApi', function(CountriesApi) {
+    CountriesApi.getAllCountries().then(function(response){
+      console.log(response);
+    });
+  }]);
