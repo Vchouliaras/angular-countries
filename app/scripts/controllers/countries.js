@@ -12,7 +12,9 @@ angular.module('angularCountriesApp')
     function($scope, CountriesApi, $log, COUNTRIES_REST_ENDPOINT) {
     CountriesApi.getAllCountries().then(
       function(response) {
-        $scope.countries = response.data;
+        if (response && response.data.length > 0) {
+          $scope.countries = response.data;
+        }
       },
       function(error) {
         $log.error('An error occured fetching data from ',
@@ -21,6 +23,4 @@ angular.module('angularCountriesApp')
         );
       }
     );
-
-
   }]);

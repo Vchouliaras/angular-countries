@@ -85,6 +85,14 @@ audio:not([controls]) {
     display: none;
 }
 
+ul {
+  margin:0;
+  li {
+    list-style-type: none;
+    padding:0;
+  }
+}
+
 // =============================================================================
 // Base
 // =============================================================================
@@ -102,16 +110,6 @@ html {
     color: $color;
     -webkit-text-size-adjust: 100%; // 2
     -ms-text-size-adjust: 100%; // 2
-}
-
-// Addresses font-family inconsistency between 'textarea' and other form elements.
-
-html,
-button,
-input,
-select,
-textarea {
-    font-family: $normalized_font_family;
 }
 
 // Addresses margins handled incorrectly in IE6/7

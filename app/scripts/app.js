@@ -15,10 +15,17 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ngMaterial'
   ])
-  .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
-  .config(['$routeProvider', function ($routeProvider) {
+  .config(['$routeProvider','$mdThemingProvider', function ($routeProvider, $mdThemingProvider) {
+    // Configure default material theme
+    $mdThemingProvider
+      .theme('indigo')
+      .primaryPalette('indigo');
+    $mdThemingProvider
+      .setDefaultTheme('indigo');
+
     // Configure route provider.
     $routeProvider
       .when('/', {
@@ -42,36 +49,39 @@ angular
         redirectTo: '/'
       });
   }])
+  // Register contast variable.
+  .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
+  // Register an $https service to get data form API.
   .factory('CountriesApi',['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
-    var $$httpParameteres = {
+    var $$httpCountriesApiParameteres = {
       'method': 'GET',
       'cache': true,
       'url': COUNTRIES_REST_ENDPOINT,
     };
     return {
       getAllCountries: function() {
-        $$httpParameteres.url += '/all';
-        return $http($$httpParameteres);
+        $$httpCountriesApiParameteres.url += '/all';
+        return $http($$httpCountriesApiParameteres);
       },
       getCountry: function(country) {
-        $$httpParameteres.url += '/' + country;
-        return $http($$httpParameteres);
+        $$httpCountriesApiParameteres.url += '/' + country;
+        return $http($$httpCountriesApiParameteres);
       },
       getLangCode: function(code) {
-        $$httpParameteres.url += '/lang/' + code;
-        return $http($$httpParameteres);
+        $$httpCountriesApiParameteres.url += '/lang/' + code;
+        return $http($$httpCountriesApiParameteres);
       },
       getCurrency: function(currency) {
-        $$httpParameteres.url += '/currency/' + currency;
-        return $http($$httpParameteres);
+        $$httpCountriesApiParameteres.url += '/currency/' + currency;
+        return $http($$httpCountriesApiParameteres);
       },
       getRegion: function(region) {
-        $$httpParameteres.url += '/region/' + region;
-        return $http($$httpParameteres);
+        $$httpCountriesApiParameteres.url += '/region/' + region;
+        return $http($$httpCountriesApiParameteres);
       },
       getCapitalCity: function(capital) {
-        $$httpParameteres.url += '/capital/' + capital;
-        return $http($$httpParameteres);
+        $$httpCountriesApiParameteres.url += '/capital/' + capital;
+        return $http($$httpCountriesApiParameteres);
       },
     };
   }]);

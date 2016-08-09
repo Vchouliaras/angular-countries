@@ -1,3 +1,19 @@
-<ul>
-  <li ng-repeat="country in countries">{{ country.name }}</li>
-</ul>
+<div layout="row" layout-align="space-around center" layout-wrap class="countries-cards">
+  <md-card ng-repeat="country in countries" flex="none" class="card">
+   <md-card-header class="md-card-header">
+      <h4 class="md-headline">{{ country.name }}</h4>
+   </md-card-header>
+   <md-card-content class="md-card-content">
+      <img width="260" height="220" src="images/flags-normal/{{ country.alpha2Code | lowercase }}.png" class="md-card-image" alt="image caption">
+   </md-card-content>
+   <md-card-actions layout="row" layout-align="end center" class="md-card-actions">
+     <md-button>Action 1</md-button>
+     <md-button>Action 2</md-button>
+     <md-card-icon-actions>
+        <md-button class="md-icon-button" aria-label="icon">
+          <md-icon md-svg-icon="icon"></md-icon>
+        </md-button>
+     </md-card-icon-actions>
+   </md-card-actions>
+  </md-card>
+</div>
