@@ -31,14 +31,22 @@
     </md-sidenav>
 
     <div class="content" layout="column" flex>
-      <md-toolbar md-whiteframe="2" class="md-toolbar">
-        <h4>ngMaterial</h4>
+      <md-toolbar md-whiteframe="2" class="md-toolbar" layout="row" layout-align="space-between center">
+        <div class="angular-logo" flex>
+          <md-icon md-svg-src="/images/angular-logo.svg" aria-label="Angular Logo" class="md-icon-angular-logo"></md-icon>
+          <h4>ngMaterial</h4>
+        </div>
+        <div class="preview-on-github" flex>
+          <a href="https://github.com/vchouliaras/angular-countries" target="_blank">
+            <md-icon md-svg-src="/images/github-logo.svg" aria-label="Github Logo" class="md-icon-github-logo"></md-icon>
+          </a>
+        </div>
       </md-toolbar>
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-view layout-padding></div>
         <div layout="row" flex="noshrink" layout-align="center center">
           <div id="license">
-            Made with love from vhouliaras
+            Copyright 2016 vchouliaras
           </div>
         </div>
       </md-content>
@@ -54,9 +62,6 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

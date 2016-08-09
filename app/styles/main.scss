@@ -16,10 +16,30 @@ md-content.md-indigo-theme {
 }
 
 .md-toolbar {
-  h4 {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 20px;
+  .angular-logo {
+    padding: 0 0 0 10px;
+    .md-icon-angular-logo{
+      float: left;
+      width: 50px;
+      height:64px;
+    }
+    h4 {
+      font-size: 20px;
+      font-weight: normal;
+      padding: 20px 20px 20px 15px;
+      display: inline-block;
+    }
+  }
+  .preview-on-github {
+    a {
+      color: rgba(255,255,255,0.87);
+      min-height: 64px;
+      border-radius:0 !important;
+      height: 100%;
+      float: right;
+      margin: 0;
+      padding: 18px;
+    }
   }
 }
 
