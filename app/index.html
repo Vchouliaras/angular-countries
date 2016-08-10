@@ -18,8 +18,6 @@
 
   <body layout="row">
 
-
-
     <!-- SIDEBAR STARTS -->
     <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2" class="md-sidenav">
         <div ng-include="views/includes/header.html"></div>
@@ -32,15 +30,7 @@
     <!-- MAIN CONTENT BEGINS -->
     <div class="content" layout="column" flex>
       <md-toolbar md-whiteframe="2" class="md-toolbar" layout="row" layout-align="space-between center">
-        <div class="angular-logo" flex>
-          <md-icon md-svg-src="/images/angular-logo.svg" aria-label="Angular Logo" class="md-icon-angular-logo"></md-icon>
-          <h4>ngMaterial</h4>
-        </div>
-        <div class="preview-on-github" flex>
-          <a href="https://github.com/vchouliaras/angular-countries" target="_blank">
-            <md-icon md-svg-src="/images/github-logo.svg" aria-label="Github Logo" class="md-icon-github-logo"></md-icon>
-          </a>
-        </div>
+        <div ng-include="'views/includes/toolbar.html'"></div>
       </md-toolbar>
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-view layout-padding></div>
