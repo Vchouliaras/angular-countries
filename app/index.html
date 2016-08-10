@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="angularCountriesApp" ng-controller="AppMainCtrl as main">
   <head>
     <meta charset="utf-8">
     <title>An Angular app for World countries</title>
@@ -15,21 +15,21 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="angularCountriesApp" layout="row">
 
+  <body layout="row">
+
+
+
+    <!-- SIDEBAR STARTS -->
     <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2" class="md-sidenav">
-      <header class="nav-header">
-        <a ng-href="/">
-          <img src="" alt="">
-        </a>
-      </header>
+        <div ng-include="views/includes/header.html"></div>
       <md-content role="nagivation" flex>
-        <ul class="menu">
-
-        </ul>
+        <div ng-include="'views/includes/menu.html'"></div>
       </md-content>
     </md-sidenav>
+    <!-- SIDEBAR ENDS -->
 
+    <!-- MAIN CONTENT BEGINS -->
     <div class="content" layout="column" flex>
       <md-toolbar md-whiteframe="2" class="md-toolbar" layout="row" layout-align="space-between center">
         <div class="angular-logo" flex>
@@ -44,13 +44,12 @@
       </md-toolbar>
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-view layout-padding></div>
-        <div layout="row" flex="noshrink" layout-align="center center">
-          <div id="license">
-            Copyright 2016 vchouliaras
-          </div>
-        </div>
+        <div ng-include="'views/includes/footer.html'"></div>
       </md-content>
     </div>
+    <!-- MAIN CONTENT ENDS -->
+
+
 
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -61,7 +60,9 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
