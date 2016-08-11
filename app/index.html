@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="angularCountriesApp" ng-controller="AppMainCtrl as main">
+<html>
   <head>
     <meta charset="utf-8">
     <title>An Angular app for World countries</title>
@@ -16,7 +16,7 @@
     <!-- endbuild -->
   </head>
 
-  <body layout="row">
+  <body ng-app="angularCountriesApp" ng-controller="AppMainCtrl as main" layout="row">
 
     <!-- SIDEBAR STARTS -->
     <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2" class="md-sidenav">
@@ -30,7 +30,7 @@
     <!-- MAIN CONTENT BEGINS -->
     <div class="content" layout="column" flex>
       <md-toolbar md-whiteframe="2" class="md-toolbar" layout="row" layout-align="space-between center">
-        <div ng-include="'views/includes/toolbar.html'"></div>
+        <div ng-include="'views/includes/toolbar.html'" class="ng-include-toolbar"></div>
       </md-toolbar>
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-view layout-padding></div>
@@ -61,6 +61,8 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/countries.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/directives/menu-toggle.js"></script>
+        <script src="scripts/directives/menu-link.js"></script>
         <!-- endbuild -->
 </body>
 </html>
