@@ -1,7 +1,7 @@
-<md-list >
-  <md-list-item ng-repeat="item in menu"> {{ item }}
-    <md-icon ng-show="true" md-svg-src="/images/svg-icons/ic_keyboard_arrow_down_black_24px.svg" aria-label="Icon Down"></md-icon>
-    <md-icon ng-show="false" md-svg-src="/images/svg-icons/ic_keyboard_arrow_up_black_24px.svg" aria-label="Icon Down"></md-icon>
-  </md-list-item>
+<ul class="menu-list">
+  <li ng-repeat="item in menu">
+    <menu-link item-data="item" ng-if="item.type === 'link'"></menu-link>
+    <menu-toggle item-data="item" ng-if="item.type === 'toggle'"></menu-toggle>
+  </li>
   <md-divider></md-divider>
-</md-list>
+</ul>
