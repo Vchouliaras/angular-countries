@@ -4,18 +4,95 @@
 @import 'variables/globals';
 @import 'base/normalize';
 
+
 body.md-indigo-theme,
 md-content.md-indigo-theme {
   background-color: #efefef !important;
+}
+
+.nav-header {
+  background: #efefef !important;
+  padding: 20px 0 20px 0;
+  text-align: center;
+  .header-link {
+    display: inline-block;
+    text-decoration: none;
+    .globe-logo {
+      height: 170px;
+      display: inline-block;
+    }
+    .md-heading {
+      font-size: 22px;
+      margin: 15px 0 0 0;
+      font-weight: normal;
+      color: #3F51B5;
+    }
+  }
 }
 
 .md-sidenav {
   width: 240px;
   max-width: 240px;
   min-width: 240px;
+  .menu-list{
+    padding:0;
+    margin:0;
+    .md-ripple-container {
+      border-radius: 0;
+    }
+    .md-button {
+      border-radius: 0;
+      cursor: pointer;
+      display: block;
+      align-items: inherit;
+      line-height: 40px;
+      margin: 0;
+      max-height: 40px;
+      overflow: hidden;
+      text-align: left;
+      text-decoration: none;
+      white-space: normal;
+      width: 100%;
+      padding: 0px 16px;
+      font-size: 13px;
+      &.menu-link-button {
+        padding: 0;
+        a:hover {
+          background: none !important;
+        }
+      }
+      .button-md-icon {
+        transition: all 0.2s linear;
+        transform: rotate(0deg);
+        &.opened{
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  .menu-list-expanded {
+    overflow: hidden;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.07);
+    max-height: 300px;
+    transition: max-height 0.5s linear;
+    .md-button {
+      text-transform: none;
+    }
+    &.ng-hide {
+      max-height: 0px;
+    }
+    .menu-link-button {
+      padding: 0 0 0 20px !important;
+    }
+  }
 }
 
 .md-toolbar {
+  .ng-include-toolbar {
+    width: 100%;
+    display: inline-flex;
+  }
   .angular-logo {
     padding: 0 0 0 10px;
     .md-icon-angular-logo{
@@ -61,7 +138,7 @@ md-content.md-indigo-theme {
     box-shadow: 0 1px 1px rgba(0,0,0,0.05);
     width: 260px;
     h4 {
-      font-size:22px;
+      font-size:20px;
     }
     .md-card-content {
       padding:0;

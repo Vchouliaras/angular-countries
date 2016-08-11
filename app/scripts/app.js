@@ -17,13 +17,19 @@ angular
     'ngSanitize',
     'ngMaterial'
   ])
-  .config(['$routeProvider','$mdThemingProvider', function ($routeProvider, $mdThemingProvider) {
+  .config(['$routeProvider','$mdThemingProvider', '$compileProvider',
+    function ($routeProvider, $mdThemingProvider, $compileProvider) {
+
+    // Remove debugging info.
+    // $compileProvider.debugInfoEnabled(false);
+
     // Configure default material theme
     $mdThemingProvider
       .theme('indigo')
       .primaryPalette('indigo');
     $mdThemingProvider
       .setDefaultTheme('indigo');
+
 
     // Configure route provider.
     $routeProvider
@@ -83,4 +89,37 @@ angular
         return $http($$httpCountriesApiParameteres);
       },
     };
+  }])
+  .controller('AppMainCtrl',['$scope', function ($scope) {
+    $scope.menu = [{
+      name: 'Countries',
+      route: 'countries',
+      type: 'link',
+    },
+    {
+      name: 'Regions',
+      type: 'toggle',
+      pages: [{
+        name: 'Africa',
+        route: 'africa',
+        type: 'link'
+      },{
+        name: 'Europe',
+        route: 'europe',
+        type: 'link'
+      }]
+    },
+    {
+      name: 'Currencies',
+      type: 'toggle',
+      pages: [{
+        name: 'Africa',
+        route: 'africa',
+        type: 'link'
+      },{
+        name: 'Europe',
+        route: 'europe',
+        type: 'link'
+      }]
+    }];
   }]);
