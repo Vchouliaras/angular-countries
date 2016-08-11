@@ -1,0 +1,11 @@
+<md-button class="menu-toggle-button" ng-click="toggleOpen()">
+      <span flex layout="row">
+        {{ itemData.name }}<span flex></span>
+        <md-icon ng-class="{opened: isOpen, closed: !isOpen}" class="button-md-icon" md-svg-icon="/images/svg-icons/ic_keyboard_arrow_down_black_24px.svg" aria-label="Icon Down"></md-icon>
+      </span>
+</md-button>
+<ul ng-show="isOpen" class="menu-list-expanded menu-list" ng-if="isDefinedVariable(itemData.pages)">
+    <li ng-repeat="expandedItem in itemData.pages">
+      <menu-link item-data="expandedItem"></menu-link>
+    </li>
+</ul>
