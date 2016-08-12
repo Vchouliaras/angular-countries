@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>An Angular app for World countries</title>
-    <meta name="description" content="">
+    <meta name="description" content="An Angular app for World countries">
     <meta name="viewport" content="width=device-width">
     <link rel="apple-touch-icon" sizes="57x57" href="images/favicons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="images/favicons/apple-icon-60x60.png">
@@ -48,7 +48,9 @@
       <md-toolbar md-whiteframe="2" class="md-toolbar" layout="row" layout-align="space-between center">
         <div ng-include="'views/includes/toolbar.html'" class="ng-include-toolbar"></div>
       </md-toolbar>
+    <md-progress-linear md-mode="buffer" class="md-warn" value="20" md-buffer-value="100"></md-progress-linear>
       <md-content id="main-content" class="md-no-momentum md-content">
+        <div ng-include="'views/includes/filters.html'"></div>
         <div ng-view layout-padding></div>
         <div ng-include="'views/includes/footer.html'"></div>
       </md-content>
