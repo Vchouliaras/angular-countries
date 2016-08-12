@@ -1,0 +1,14 @@
+<div layout="row" layout-padding layout-align="start center" class="content-filters">
+  <md-input-container flex="20">
+      <label>Sort By Population</label>
+      <md-select ng-model="selectedPopulationFilters">
+          <md-option ng-repeat="filter in Populationfilters" value="{{filter}}">{{filter}}</md-option>
+      </md-select>
+  </md-input-container>
+  <md-input-container flex="20">
+      <label>Sort By Currency</label>
+      <md-select ng-model="selectedAreaFilters">
+          <md-option ng-repeat="filter in Areafilters" value="{{filter}}">{{filter}}</md-option>
+      </md-select>
+  </md-input-container>
+</div>
