@@ -8,89 +8,134 @@
  *
  * Main module of the application.
  */
+
+var services = angular.module('services',[]);
+services.factory('CountriesApiIntrercept',[function() {
+    return {
+      request: function(config) {
+        if (config.method === "GET" && config.url.indexOf('restcountries') > 0) {
+          // console.log('An HTTP call started', config);
+        }
+        return config;
+      },
+      requestError: function(){
+
+      },
+      response: function(response) {
+        if (response.config.method === "GET" && response.config.url.indexOf('restcountries') > 0) {
+          // console.log('An HTTP call ended', $q);
+        }
+        return response;
+      },
+      // responseError: function(response) {
+
+      // },
+    };
+}]);
+services.factory('CountriesJsonHelper', ['$http', function($http) {
+  return $http({
+    'method': 'GET',
+    'cache': true,
+    'url': '/images/flags/countries.json',
+  });
+}]);
+services.factory('CountriesApi', ['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
+  var $$httpCountriesApiParameteres = {
+    'method': 'GET',
+    'cache': true
+  };
+
+  return {
+    getAllCountries: function() {
+      $$httpCountriesApiParameteres.url = COUNTRIES_REST_ENDPOINT + '/all';
+      return $http($$httpCountriesApiParameteres);
+    },
+    getCountry: function(country) {
+      $$httpCountriesApiParameteres.url = COUNTRIES_REST_ENDPOINT + country;
+      return $http($$httpCountriesApiParameteres);
+    },
+    getLangCode: function(code) {
+      $$httpCountriesApiParameteres.url += '/lang/' + code;
+      return $http($$httpCountriesApiParameteres);
+    },
+    getCurrency: function(currency) {
+      $$httpCountriesApiParameteres.url = COUNTRIES_REST_ENDPOINT + currency;
+      return $http($$httpCountriesApiParameteres);
+    },
+    getRegion: function(region) {
+      $$httpCountriesApiParameteres.url = COUNTRIES_REST_ENDPOINT + '/region/' + region;
+      return $http($$httpCountriesApiParameteres);
+    },
+    getCapitalCity: function(capital) {
+      $$httpCountriesApiParameteres.url = COUNTRIES_REST_ENDPOINT + capital;
+      return $http($$httpCountriesApiParameteres);
+    },
+  };
+}]);
+
+
+
 angular
-  .module('angularCountriesApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngMaterial'
-  ])
-  .config(['$routeProvider','$mdThemingProvider', '$compileProvider',
-    function ($routeProvider, $mdThemingProvider, $compileProvider) {
-
-    // Remove debugging info.
-    // $compileProvider.debugInfoEnabled(false);
-
+  .module('angularCountriesApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize','ngMaterial','services'])
+  .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
+  .config(['$mdThemingProvider', function($mdThemingProvider){
     // Configure default material theme
     $mdThemingProvider
       .theme('indigo')
       .primaryPalette('indigo');
     $mdThemingProvider
       .setDefaultTheme('indigo');
+  }])
+  // .config(['$compileProvider', function($compileProvider){
+  //   // Remove debugging info.
+  //   // $compileProvider.debugInfoEnabled(false);
+  // }])
+  // .config(['$locationProvider', function($locationProvider){
+  //   //Activate HTML5 Mode.
+  //   // $locationProvider.html5Mode(true);
+  // }])
+  .config(['$routeProvider', function($routeProvider){
+      var originalWhen = $routeProvider.when.bind($routeProvider);
+      $routeProvider.when = function(paths, routes) {
+        if (!angular.isArray(paths)) {
+          paths = [paths];
+        }
+        paths.forEach(function (path) {
+          originalWhen(path, routes);
+        });
+        return $routeProvider;
+      };
+  }])
+  .config(['$routeProvider','$httpProvider',
+    function ($routeProvider, $httpProvider) {
 
+    $httpProvider.interceptors.push('CountriesApiIntrercept');
 
     // Configure route provider.
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/countries.html',
+      .when(['/', '/region/:region'], {
+        templateUrl: 'views/main.html',
         controller: 'CountriesCtrl',
-        controllerAs: 'countries'
-        // @TODO
-        // resolve: {
-        //   async: function(){
-            // return the promise object of the call,
-            // which has data in it.
-        //   }
-        // }
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controllerAs: 'countries',
+        resolve: {
+          CountriesAvailableImages: function(CountriesJsonHelper) {
+            return CountriesJsonHelper.success(function(response) {
+              return response;
+            });
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'
       });
   }])
-  // Register contast variable.
-  .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
-  // Register an $https service to get data form API.
-  .factory('CountriesApi',['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
-    var $$httpCountriesApiParameteres = {
-      'method': 'GET',
-      'cache': true,
-      'url': COUNTRIES_REST_ENDPOINT,
-    };
-    return {
-      getAllCountries: function() {
-        $$httpCountriesApiParameteres.url += '/all';
-        return $http($$httpCountriesApiParameteres);
-      },
-      getCountry: function(country) {
-        $$httpCountriesApiParameteres.url += '/' + country;
-        return $http($$httpCountriesApiParameteres);
-      },
-      getLangCode: function(code) {
-        $$httpCountriesApiParameteres.url += '/lang/' + code;
-        return $http($$httpCountriesApiParameteres);
-      },
-      getCurrency: function(currency) {
-        $$httpCountriesApiParameteres.url += '/currency/' + currency;
-        return $http($$httpCountriesApiParameteres);
-      },
-      getRegion: function(region) {
-        $$httpCountriesApiParameteres.url += '/region/' + region;
-        return $http($$httpCountriesApiParameteres);
-      },
-      getCapitalCity: function(capital) {
-        $$httpCountriesApiParameteres.url += '/capital/' + capital;
-        return $http($$httpCountriesApiParameteres);
-      },
-    };
-  }])
   .controller('AppMainCtrl',['$scope', function ($scope) {
+    // $scope.determinateValue = 0;
+    // $scope.$on('$viewContentLoaded', function(){
+    //     $scope.determinateValue = 100;
+    // });
+    $scope.selectedPopulationFilters = $scope.selectedAreaFilters = [];
+    $scope.Populationfilters = $scope.Areafilters =['From High to Low', 'From Low to High'];
     $scope.menu = [{
       name: 'Countries',
       route: 'countries',
@@ -101,11 +146,25 @@ angular
       type: 'toggle',
       pages: [{
         name: 'Africa',
-        route: 'africa',
+        route: 'region/africa',
+        type: 'link'
+      },{
+        name: 'Asia',
+        route: 'region/asia',
+        type: 'link'
+      },
+      {
+        name: 'Americas',
+        route: 'region/americas',
         type: 'link'
       },{
         name: 'Europe',
-        route: 'europe',
+        route: 'region/europe',
+        type: 'link'
+      },
+      {
+        name: 'Oceania',
+        route: 'region/oceania',
         type: 'link'
       }]
     },
