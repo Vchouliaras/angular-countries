@@ -8,10 +8,14 @@
  * Controller of the angularCountriesApp
  */
 angular.module('angularCountriesApp')
-  .controller('CountriesCtrl', ['$scope','$log','CountriesApi','$routeParams','CountriesAvailableImages', 'COUNTRIES_REST_ENDPOINT',
-    function($scope, $log, CountriesApi, $routeParams, CountriesAvailableImages, COUNTRIES_REST_ENDPOINT) {
+  .controller('CountriesCtrl', ['$scope','$log','CountriesApi','$routeParams', 'COUNTRIES_REST_ENDPOINT','CountriesAvailableImages',
+    function($scope, $log, CountriesApi, $routeParams,COUNTRIES_REST_ENDPOINT, CountriesAvailableImages) {
 
-    var fn, parameter = null;
+    var fn = null;
+    var parameter = null;
+    var Countries = [];
+    var Areafilters = [];
+
     if ($routeParams.region) {
       fn = 'getRegion';
       parameter = $routeParams.region;
@@ -27,13 +31,20 @@ angular.module('angularCountriesApp')
     CountriesApi[fn].call(this, parameter).then(
       function(response) {
         if (response && response.data.length > 0) {
-          $scope.countries = [];
-          // Remove countries with no reference flag in countries.json
           angular.forEach(response.data, function(value, key) {
+            // Remove countries with no reference flag in countries.json.
             if (CountriesAvailableImages.data[value.alpha2Code] !== undefined) {
-              $scope.countries.push(value);
+              Countries.push(value);
+              // Remove duplicates from currencies
+              if (Areafilters.indexOf(value.currencies[0]) < 0) {
+                Areafilters.push(value.currencies[0]);
+              }
             }
           });
+
+          // Define $scope variables.
+          $scope.countries = Countries;
+          $scope.$root.Areafilters = Areafilters;
         }
       },
       function(error) {

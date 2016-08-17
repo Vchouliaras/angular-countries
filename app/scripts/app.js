@@ -32,19 +32,29 @@ services.factory('CountriesApiIntrercept',[function() {
       // },
     };
 }]);
-services.factory('CountriesJsonHelper', ['$http', function($http) {
-  return $http({
-    'method': 'GET',
-    'cache': true,
-    'url': '/images/flags/countries.json',
-  });
+services.factory('CountriesHelper', ['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
+  return {
+    CountriesAvailableImages: function() {
+      return $http({
+        'method': 'GET',
+        'cache': true,
+        'url': '/images/flags/countries.json',
+      });
+    },
+    CountriesAllData: function() {
+      return $http({
+        'method': 'GET',
+        'cache': true,
+        'url': COUNTRIES_REST_ENDPOINT,
+      });
+    }
+  };
 }]);
 services.factory('CountriesApi', ['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
   var $$httpCountriesApiParameteres = {
     'method': 'GET',
     'cache': true
   };
-
   return {
     getAllCountries: function() {
       $$httpCountriesApiParameteres.url = COUNTRIES_REST_ENDPOINT + '/all';
@@ -118,8 +128,8 @@ angular
         controller: 'CountriesCtrl',
         controllerAs: 'countries',
         resolve: {
-          CountriesAvailableImages: function(CountriesJsonHelper) {
-            return CountriesJsonHelper.success(function(response) {
+          CountriesAvailableImages: function(CountriesHelper) {
+            return CountriesHelper.CountriesAvailableImages().success(function(response) {
               return response;
             });
           }
@@ -129,13 +139,11 @@ angular
         redirectTo: '/'
       });
   }])
-  .controller('AppMainCtrl',['$scope', function ($scope) {
-    // $scope.determinateValue = 0;
-    // $scope.$on('$viewContentLoaded', function(){
-    //     $scope.determinateValue = 100;
-    // });
-    $scope.selectedPopulationFilters = $scope.selectedAreaFilters = [];
-    $scope.Populationfilters = $scope.Areafilters =['From High to Low', 'From Low to High'];
+  .controller('AppMainCtrl',['$scope','CountriesHelper', function ($scope, CountriesHelper) {
+
+    $scope.$root.Populationfilters = ['From High to Low', 'From Low to High'];
+    $scope.$root.Areafilters = [];
+
     $scope.menu = [{
       name: 'Countries',
       route: 'countries',
@@ -165,19 +173,6 @@ angular
       {
         name: 'Oceania',
         route: 'region/oceania',
-        type: 'link'
-      }]
-    },
-    {
-      name: 'Currencies',
-      type: 'toggle',
-      pages: [{
-        name: 'Africa',
-        route: 'africa',
-        type: 'link'
-      },{
-        name: 'Europe',
-        route: 'europe',
         type: 'link'
       }]
     }];

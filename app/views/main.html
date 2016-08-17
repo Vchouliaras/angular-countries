@@ -1,23 +1,18 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
-
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div layout="row" layout-align="space-around center" layout-wrap class="countries-cards">
+  <md-card ng-repeat="country in countries" flex="none" class="card">
+   <md-card-header class="md-card-header">
+      <h4 class="md-headline">{{ country.name }}</h4>
+   </md-card-header>
+   <md-card-content class="md-card-content">
+      <img width="260" height="220" src="images/flags/{{ country.alpha2Code | lowercase }}.png" class="md-card-image" alt="{{ country.name }}">
+   </md-card-content>
+   <md-card-actions layout="row" layout-align="end center" class="md-card-actions">
+     <md-button>Action 1</md-button>
+     <md-card-icon-actions>
+        <md-button class="md-icon-button" aria-label="icon">
+          !!
+        </md-button>
+     </md-card-icon-actions>
+   </md-card-actions>
+  </md-card>
 </div>
