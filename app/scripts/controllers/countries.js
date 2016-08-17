@@ -8,8 +8,8 @@
  * Controller of the angularCountriesApp
  */
 angular.module('angularCountriesApp')
-  .controller('CountriesCtrl', ['$scope','$log','CountriesApi','$routeParams', 'COUNTRIES_REST_ENDPOINT','CountriesAvailableImages',
-    function($scope, $log, CountriesApi, $routeParams,COUNTRIES_REST_ENDPOINT, CountriesAvailableImages) {
+  .controller('CountriesCtrl', ['$rootScope', '$scope','$log','CountriesApi','$routeParams', 'COUNTRIES_REST_ENDPOINT','CountriesAvailableImages',
+    function($rootScope, $scope, $log, CountriesApi, $routeParams,COUNTRIES_REST_ENDPOINT, CountriesAvailableImages) {
 
     var fn = null;
     var parameter = null;
@@ -42,9 +42,9 @@ angular.module('angularCountriesApp')
             }
           });
 
-          // Define $scope variables.
-          $scope.countries = Countries;
-          $scope.$root.Areafilters = Areafilters;
+          // Define global $scope variables.
+          $rootScope.Countries = Countries;
+          $rootScope.Areafilters = Areafilters;
         }
       },
       function(error) {

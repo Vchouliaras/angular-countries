@@ -139,10 +139,10 @@ angular
         redirectTo: '/'
       });
   }])
-  .controller('AppMainCtrl',['$scope','CountriesHelper', function ($scope, CountriesHelper) {
+  .controller('AppMainCtrl',['$rootScope','$scope','CountriesHelper',
+    function ($rootScope, $scope, CountriesHelper) {
 
-    $scope.$root.Populationfilters = ['From High to Low', 'From Low to High'];
-    $scope.$root.Areafilters = [];
+    $rootScope.Populationfilters = ['From High to Low', 'From Low to High'];
 
     $scope.menu = [{
       name: 'Countries',
