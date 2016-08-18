@@ -18,7 +18,7 @@
       </md-select>
   </md-input-container>
   <md-input-container class="search-input-field-container" ng-show="SearchInput.appear">
-    <input ng-model="inputSearchTerm" type="text" placeholder="Search for Country, Capital ...">
+    <input ng-keyup="selectedSearchInputTerm(inputSearchTerm)" ng-model="inputSearchTerm" type="text" placeholder="Search for Country or Capital">
   </md-input-container>
   <md-input-container class="search-input-icon-container">
     <md-icon md-svg-src="/images/svg-icons/ic_search_black_24px.svg" ng-click="toggleSearch()"></md-icon>

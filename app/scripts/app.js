@@ -157,6 +157,24 @@ angular
       $scope.SearchInput.appear = (!$scope.SearchInput.appear) ? true : false;
     };
 
+    // Search input terms.
+    $scope.selectedSearchInputTerm = '';
+    $scope.selectedSearchInputTerm = function(value) {
+      var expression;
+      $rootScope.Countries = $rootScope.CountriesTemp;
+      $rootScope.Countries = filterFilter($rootScope.Countries,
+        function(item) {
+          expression = (item.name + ' ' + item.capital).toLowerCase().trim();
+          return (expression.search(value.toLowerCase().trim()) !== -1) ? true : false;
+        });
+    };
+
+    // Toggle input search field.
+    $scope.SearchInput = {appear: false};
+    $scope.toggleSearch = function() {
+      $scope.SearchInput.appear = (!$scope.SearchInput.appear) ? true : false;
+    };
+
     $scope.Populationfilters = ['From High to Low', 'From Low to High'];
     // When a Population filter is selected.
     $scope.selectedPopulationFilterChanged = function(value) {
