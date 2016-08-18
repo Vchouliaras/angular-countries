@@ -27,9 +27,9 @@ services.factory('CountriesApiIntrercept',[function() {
         }
         return response;
       },
-      // responseError: function(response) {
+      responseError: function() {
 
-      // },
+      },
     };
 }]);
 services.factory('CountriesHelper', ['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
@@ -139,10 +139,30 @@ angular
         redirectTo: '/'
       });
   }])
-  .controller('AppMainCtrl',['$rootScope','$scope','CountriesHelper',
-    function ($rootScope, $scope, CountriesHelper) {
+  .filter('spacesToDashes', function() {
+    return function(input) {
+      return (input !== undefined) ? angular.lowercase(input).replace(/[\s]/g, '_') : '';
+    };
+  })
+  .controller('AppMainCtrl',['$rootScope','$scope','$filter',
+    function ($rootScope, $scope, $filter) {
 
-    $rootScope.Populationfilters = ['From High to Low', 'From Low to High'];
+    // Register filters.
+    var orderByFilter = $filter('orderBy');
+    var filterFilter = $filter('filter');
+
+    $scope.Populationfilters = ['From High to Low', 'From Low to High'];
+    // When a Population filter is selected.
+    $scope.selectedPopulationFilterChanged = function(value) {
+      value = (value === 'from_low_to_high') ? '+' : '-';
+      $rootScope.Countries = orderByFilter($rootScope.Countries, value + 'population');
+    };
+
+    // When a new Currency filter is selected.
+    $scope.selectedCurrencyFilterChanged = function(value) {
+      $rootScope.Countries = $rootScope.CountriesTemp;
+      $rootScope.Countries = filterFilter($rootScope.Countries, {currencies: value});
+    };
 
     $scope.menu = [{
       name: 'Countries',

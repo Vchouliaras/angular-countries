@@ -43,7 +43,7 @@ angular.module('angularCountriesApp')
           });
 
           // Define global $scope variables.
-          $rootScope.Countries = Countries;
+          $rootScope.CountriesTmp = $rootScope.Countries = Countries;
           $rootScope.Areafilters = Areafilters;
         }
       },
