@@ -151,11 +151,26 @@ angular
     var orderByFilter = $filter('orderBy');
     var filterFilter = $filter('filter');
 
+    // Toggle input search field.
+    $scope.SearchInput = {appear: false};
+    $scope.toggleSearch = function() {
+      $scope.SearchInput.appear = (!$scope.SearchInput.appear) ? true : false;
+    };
+
     $scope.Populationfilters = ['From High to Low', 'From Low to High'];
     // When a Population filter is selected.
     $scope.selectedPopulationFilterChanged = function(value) {
+      $scope.selectedAreaFilter = '';
       value = (value === 'from_low_to_high') ? '+' : '-';
       $rootScope.Countries = orderByFilter($rootScope.Countries, value + 'population');
+    };
+
+    $scope.Areafilters = ['From Big to Small', 'From Small to Big'];
+    // When a Area filter is selected.
+    $scope.selectedAreaFilterChanged = function(value) {
+      $scope.selectedPopulationFilter = '';
+      value = (value === 'from_small_to_big') ? '+' : '-';
+      $rootScope.Countries = orderByFilter($rootScope.Countries, value + 'area');
     };
 
     // When a new Currency filter is selected.

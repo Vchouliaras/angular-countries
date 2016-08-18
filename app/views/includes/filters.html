@@ -1,14 +1,27 @@
 <div layout="row" layout-padding layout-align="start center" class="content-filters">
-  <md-input-container flex="20">
+  <md-input-container flex="20" ng-show="!SearchInput.appear">
       <label>Filter By Currency</label>
       <md-select ng-model="selectedCurrencyFilter" ng-change="selectedCurrencyFilterChanged(selectedCurrencyFilter)">
-          <md-option ng-value="filter" ng-repeat="filter in Areafilters" value="{{filter}}">{{filter}}</md-option>
+          <md-option ng-value="filter" ng-repeat="filter in Currencyfilters" value="{{filter}}">{{filter}}</md-option>
       </md-select>
   </md-input-container>
-  <md-input-container flex="20">
+  <md-input-container flex="20" ng-show="!SearchInput.appear">
       <label>Sort By Population</label>
       <md-select ng-model="selectedPopulationFilter" ng-change="selectedPopulationFilterChanged(selectedPopulationFilter)">
           <md-option ng-value="filter | spacesToDashes" ng-repeat="filter in Populationfilters" value="{{filter}}">{{filter}}</md-option>
       </md-select>
   </md-input-container>
+  <md-input-container flex="20" ng-show="!SearchInput.appear">
+      <label>Sort By Area</label>
+      <md-select ng-model="selectedAreaFilter" ng-change="selectedAreaFilterChanged(selectedAreaFilter)">
+          <md-option ng-value="filter | spacesToDashes" ng-repeat="filter in Areafilters" value="{{filter}}">{{filter}}</md-option>
+      </md-select>
+  </md-input-container>
+  <md-input-container class="search-input-field-container" ng-show="SearchInput.appear">
+    <input ng-model="inputSearchTerm" type="text" placeholder="Search for Country, Capital ...">
+  </md-input-container>
+  <md-input-container class="search-input-icon-container">
+    <md-icon md-svg-src="/images/svg-icons/ic_search_black_24px.svg" ng-click="toggleSearch()"></md-icon>
+  </md-input-container>
 </div>
+
