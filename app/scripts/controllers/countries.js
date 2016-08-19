@@ -14,7 +14,7 @@ angular.module('angularCountriesApp')
     var fn = null;
     var parameter = null;
     var Countries = [];
-    var Areafilters = [];
+    var Currencyfilters = [];
 
     if ($routeParams.region) {
       fn = 'getRegion';
@@ -36,15 +36,15 @@ angular.module('angularCountriesApp')
             if (CountriesAvailableImages.data[value.alpha2Code] !== undefined) {
               Countries.push(value);
               // Remove duplicates from currencies
-              if (Areafilters.indexOf(value.currencies[0]) < 0) {
-                Areafilters.push(value.currencies[0]);
+              if (Currencyfilters.indexOf(value.currencies[0]) < 0) {
+                Currencyfilters.push(value.currencies[0]);
               }
             }
           });
 
           // Define global $scope variables.
-          $rootScope.CountriesTmp = $rootScope.Countries = Countries;
-          $rootScope.Areafilters = Areafilters;
+          $rootScope.CountriesTemp = $rootScope.Countries = Countries;
+          $rootScope.CurrencyfiltersTemp = $rootScope.Currencyfilters = Currencyfilters;
         }
       },
       function(error) {

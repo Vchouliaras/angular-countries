@@ -168,7 +168,6 @@ angular
           return (expression.search(value.toLowerCase().trim()) !== -1) ? true : false;
         });
     };
-
     // Toggle input search field.
     $scope.SearchInput = {appear: false};
     $scope.toggleSearch = function() {
@@ -191,10 +190,36 @@ angular
       $rootScope.Countries = orderByFilter($rootScope.Countries, value + 'area');
     };
 
+    $scope.searchCurrencyTerm = {term: ''};
+    $scope.clearSearchCurrencyTerm = function(){
+      $scope.searchCurrencyTerm.term = '';
+    };
+
+    // The md-select directive eats keydown events for some quick select
+    // logic. Since we have a search input here, we don't need that logic.
+    $scope.stopKeyDownPropagation = function() {
+      document.body.querySelector('.demo-select-header').querySelector('input')
+      .addEventListener('keydown', function(event) {
+        event.stopPropagation();
+      });
+    };
+
     // When a new Currency filter is selected.
     $scope.selectedCurrencyFilterChanged = function(value) {
+      var tempArr = [];
+      $rootScope.Currencyfilters = $rootScope.CurrencyfiltersTemp;
       $rootScope.Countries = $rootScope.CountriesTemp;
-      $rootScope.Countries = filterFilter($rootScope.Countries, {currencies: value});
+      if (value.length > 0) {
+        angular.forEach(value, function(option) {
+          tempArr = tempArr
+            .concat(filterFilter($rootScope.Countries, {currencies: option}))
+            // Remove duplicate values.
+            .filter(function(el) {
+              return tempArr.indexOf(el) === -1;
+            });
+        });
+        $rootScope.Countries = tempArr;
+      }
     };
 
     $scope.menu = [{

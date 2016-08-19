@@ -1,9 +1,22 @@
 <div layout="row" layout-padding layout-align="start center" class="content-filters">
-  <md-input-container flex="20" ng-show="!SearchInput.appear">
-      <label>Filter By Currency</label>
-      <md-select ng-model="selectedCurrencyFilter" ng-change="selectedCurrencyFilterChanged(selectedCurrencyFilter)">
-          <md-option ng-value="filter" ng-repeat="filter in Currencyfilters" value="{{filter}}">{{filter}}</md-option>
-      </md-select>
+ <md-input-container flex="20" ng-show="!SearchInput.appear">
+    <label>Filter by Currency</label>
+    <md-select ng-model="selectedCurrencyFilter"
+               ng-change="selectedCurrencyFilterChanged(selectedCurrencyFilter)"
+               md-on-close="clearSearchCurrencyTerm()"
+               md-on-open="stopKeyDownPropagation()"
+               data-md-container-class="selectCurrenciesSelectHeader"
+               multiple>
+      <md-select-header class="demo-select-header">
+        <input ng-model="searchCurrencyTerm.term"
+               type="search"
+               placeholder="Search for currencies..."
+               class="demo-header-searchbox md-text">
+      </md-select-header>
+      <md-optgroup label="Currencyfilters">
+        <md-option ng-value="filter" ng-repeat="filter in Currencyfilters | filter:searchCurrencyTerm.term ">{{filter}}</md-option>
+      </md-optgroup>
+    </md-select>
   </md-input-container>
   <md-input-container flex="20" ng-show="!SearchInput.appear">
       <label>Sort By Population</label>
