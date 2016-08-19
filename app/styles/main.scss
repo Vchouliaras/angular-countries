@@ -160,6 +160,7 @@ md-content.md-indigo-theme {
     border-top: 1px solid #ddd;
     font-size:14px;
     a {
+      text-decoration: none;
       color:rgba(0,0,0,0.87);
     }
   }
@@ -227,7 +228,7 @@ md-content.md-indigo-theme {
 
 .md-dialog-container {
   .country-info {
-    position: absolute;
-    left: 15px;
+    // position: absolute;
+    // left: 15px;
   }
 }

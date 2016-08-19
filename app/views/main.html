@@ -7,7 +7,7 @@
       <img width="265" ng-src="images/flags/{{ country.alpha2Code | lowercase }}.png" class="md-card-image" alt="{{ country.name }}">
    </md-card-content>
    <md-card-actions layout="row" layout-align="end center" class="md-card-actions">
-     <md-button data-coordinates="{{country.latlng}}" data-population="{{country.population}}" class="on-map" ng-click="showOnMapDialog($event, country.population, country.latlng, country.name, country.capital)"><md-icon md-svg-src="/images/svg-icons/ic_place_black_24px.svg"></md-icon> ON MAP</md-button>
+     <md-button class="on-map" ng-click="showOnMapDialog($event, country.alpha2Code, country.latlng, country.name, country.capital)"><md-icon md-svg-src="/images/svg-icons/ic_place_black_24px.svg"></md-icon> ON MAP</md-button>
      <md-card-icon-actions>
         <md-button ng-href="https://en.wikipedia.org/wiki/{{country.name}}" target="_blank" title="{{country.name}} in Wikipedia" class="md-icon-button" aria-label="icon">
           <md-icon md-svg-src="/images/svg-icons/ic_school_black_24px.svg"></md-icon>
