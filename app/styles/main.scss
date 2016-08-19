@@ -172,7 +172,7 @@ md-content.md-indigo-theme {
     border-radius: 2px;
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
     box-shadow: 0 1px 1px rgba(0,0,0,0.05);
-    width: 260px;
+    width: 265px;
     h4 {
       font-size:20px;
     }
@@ -183,9 +183,19 @@ md-content.md-indigo-theme {
       border-top: 2px solid #ddd;
       border-bottom: 2px solid #ddd;
       img {
-        max-width: 100%;
+        width: 100%;
         height: 100%;
         border-radius: 0;
+      }
+    }
+    .md-card-actions {
+      .on-map {
+        md-icon {
+          width: 20px;
+          svg {
+            fill: #cfcfcf;
+          }
+        }
       }
     }
   }

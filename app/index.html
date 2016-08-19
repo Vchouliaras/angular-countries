@@ -24,6 +24,7 @@
     <meta name="theme-color" content="#efefef">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -47,7 +48,7 @@
       <md-toolbar md-whiteframe="2" class="md-toolbar" layout="row" layout-align="space-between center">
         <div ng-include="'views/includes/toolbar.html'" class="ng-include-toolbar"></div>
       </md-toolbar>
-    <md-progress-linear md-mode="buffer" class="md-warn" value="20" md-buffer-value="100"></md-progress-linear>
+     <md-progress-linear md-mode="determinate" class="md-warn" value="90"></md-progress-linear>
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-include="'views/includes/filters.html'"></div>
         <div ng-view layout-padding></div>
