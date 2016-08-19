@@ -34,7 +34,8 @@
     <input ng-keyup="selectedSearchInputTerm(inputSearchTerm)" ng-model="inputSearchTerm" type="text" placeholder="Search for Country or Capital">
   </md-input-container>
   <md-input-container class="search-input-icon-container">
-    <md-icon md-svg-src="/images/svg-icons/ic_search_black_24px.svg" ng-click="toggleSearch()"></md-icon>
+    <md-icon md-svg-src="/images/svg-icons/ic_clear_black_24px.svg" ng-show="SearchInput.appear" ng-click="toggleSearch()"></md-icon>
+    <md-icon md-svg-src="/images/svg-icons/ic_search_black_24px.svg" ng-show="!SearchInput.appear" ng-click="toggleSearch()"></md-icon>
   </md-input-container>
 </div>
 
