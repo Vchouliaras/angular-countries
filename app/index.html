@@ -51,6 +51,7 @@
      <md-progress-linear md-mode="determinate" class="md-warn" value="90"></md-progress-linear>
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-include="'views/includes/filters.html'"></div>
+
         <div ng-view layout-padding></div>
         <div ng-include="'views/includes/footer.html'"></div>
       </md-content>
@@ -58,7 +59,7 @@
     <!-- MAIN CONTENT ENDS -->
 
 
-
+    <script src="http://maps.google.com/maps/api/js"></script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -72,15 +73,17 @@
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/countries.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/directives/menu-toggle.js"></script>
-        <script src="scripts/directives/menu-link.js"></script>
-        <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/countries.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/directives/menu-toggle.js"></script>
+    <script src="scripts/directives/menu-link.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

@@ -86,7 +86,7 @@ services.factory('CountriesApi', ['$http', 'COUNTRIES_REST_ENDPOINT', function($
 
 
 angular
-  .module('angularCountriesApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize','ngMaterial','services'])
+  .module('angularCountriesApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize','ngMaterial','ngMap','services'])
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
   .config(['$mdThemingProvider', function($mdThemingProvider){
     // Configure default material theme
@@ -206,17 +206,17 @@ angular
 
     // When a new Currency filter is selected.
     $scope.selectedCurrencyFilterChanged = function(value) {
-      var tempArr = [];
       $rootScope.Currencyfilters = $rootScope.CurrencyfiltersTemp;
       $rootScope.Countries = $rootScope.CountriesTemp;
       if (value.length > 0) {
+        var tempArr = [];
         angular.forEach(value, function(option) {
-          tempArr = tempArr
-            .concat(filterFilter($rootScope.Countries, {currencies: option}))
-            // Remove duplicate values.
-            .filter(function(el) {
+          tempArr = tempArr.concat(filterFilter($rootScope.Countries, {currencies: option}));
+          // Remove duplicate values from tempArr to avoid duplicate entries error.
+          tempArr.filter(function(el) {
               return tempArr.indexOf(el) === -1;
             });
+
         });
         $rootScope.Countries = tempArr;
       }
