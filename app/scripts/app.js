@@ -34,7 +34,7 @@ services.factory('CountriesApiIntrercept',[function() {
 }]);
 services.factory('CountriesHelper', ['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
   return {
-    CountriesAvailableImages: function() {
+    CountriesAvailableImagesHelper: function() {
       return $http({
         'method': 'GET',
         'cache': true,
@@ -86,7 +86,7 @@ services.factory('CountriesApi', ['$http', 'COUNTRIES_REST_ENDPOINT', function($
 
 
 angular
-  .module('angularCountriesApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize','ngMaterial','ngMap','services'])
+  .module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMaterial','ngMap','services'])
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
   .config(['$mdThemingProvider', function($mdThemingProvider){
     // Configure default material theme
@@ -96,10 +96,10 @@ angular
     $mdThemingProvider
       .setDefaultTheme('indigo');
   }])
-  // .config(['$compileProvider', function($compileProvider){
-  //   // Remove debugging info.
-  //   // $compileProvider.debugInfoEnabled(false);
-  // }])
+  .config(['$compileProvider', function($compileProvider){
+    // Remove debugging info.
+    $compileProvider.debugInfoEnabled(false);
+  }])
   // .config(['$locationProvider', function($locationProvider){
   //   //Activate HTML5 Mode.
   //   // $locationProvider.html5Mode(true);
@@ -128,17 +128,22 @@ angular
         controller: 'CountriesCtrl',
         controllerAs: 'countries',
         resolve: {
-          CountriesAvailableImages: function(CountriesHelper) {
-            return CountriesHelper.CountriesAvailableImages().success(function(response) {
+          CountriesAvailableImages: ['CountriesHelper', function(CountriesHelper) {
+            return CountriesHelper.CountriesAvailableImagesHelper().success(function(response) {
               return response;
             });
-          }
+          }]
         }
       })
       .otherwise({
         redirectTo: '/'
       });
   }])
+
+
+
+
+
   .filter('spacesToDashes', function() {
     return function(input) {
       return (input !== undefined) ? angular.lowercase(input).replace(/[\s]/g, '_') : '';
