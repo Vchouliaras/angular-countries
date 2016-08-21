@@ -10,28 +10,6 @@
  */
 
 var services = angular.module('services',[]);
-services.factory('CountriesApiIntrercept',[function() {
-    return {
-      request: function(config) {
-        if (config.method === "GET" && config.url.indexOf('restcountries') > 0) {
-          // console.log('An HTTP call started', config);
-        }
-        return config;
-      },
-      requestError: function(){
-
-      },
-      response: function(response) {
-        if (response.config.method === "GET" && response.config.url.indexOf('restcountries') > 0) {
-          // console.log('An HTTP call ended', $q);
-        }
-        return response;
-      },
-      responseError: function() {
-
-      },
-    };
-}]);
 services.factory('CountriesHelper', ['$http', 'COUNTRIES_REST_ENDPOINT', function($http, COUNTRIES_REST_ENDPOINT) {
   return {
     CountriesAvailableImagesHelper: function() {
@@ -88,6 +66,12 @@ services.factory('CountriesApi', ['$http', 'COUNTRIES_REST_ENDPOINT', function($
 angular
   .module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMaterial','ngMap','services'])
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
+  .run(['$rootScope', '$window', function($rootScope, $window) {
+    $rootScope.$on('$routeChangeSuccess', function() {
+      console.log('run');
+      $window.scrollTo(0,0);
+    });
+  }])
   .config(['$mdThemingProvider', function($mdThemingProvider){
     // Configure default material theme
     $mdThemingProvider
@@ -118,8 +102,6 @@ angular
   }])
   .config(['$routeProvider','$httpProvider',
     function ($routeProvider, $httpProvider) {
-
-    $httpProvider.interceptors.push('CountriesApiIntrercept');
 
     // Configure route provider.
     $routeProvider
