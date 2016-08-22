@@ -277,7 +277,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['uglifyjs'],
+              js: ['concat', 'uglifyjs'],
               css: ['cssmin']
             },
             post: {}
@@ -370,14 +370,14 @@ module.exports = function (grunt) {
 
     ngtemplates: {
       dist: {
+        cwd: '<%= yeoman.app %>',
+        src: 'views/{,*/}*.html',
+        dest: 'app/scripts/template.js',
         options: {
           module: 'angularCountriesApp',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
-        cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
-        dest: '.tmp/templateCache.js'
       }
     },
 
@@ -494,7 +494,6 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-   // 'cdnify',
     'cssmin',
     'uglify',
     'filerev',
