@@ -83,10 +83,11 @@ angular.module('angularCountriesApp')
 
     // Trigger Google Map resize to tackle display issue
     // and initialize center.
-    $scope.initializeNgMap = function(map) {
+    $scope.initializeNgMap = function(map, zoom) {
       var coord = map.getCenter();
       window.google.maps.event.trigger(map, "resize");
       map.setCenter(new window.google.maps.LatLng(coord.lat(), coord.lng()));
+      map.setZoom(zoom);
     };
 
     // Remove fusion tables.
@@ -95,7 +96,7 @@ angular.module('angularCountriesApp')
     };
 
     // Adds support for dialogs in countries with Google Maps intergration.
-    $scope.showOnMapDialog = function($event, alpha2Code, coordinates, name, capital) {
+    $scope.showOnMapDialog = function($event, alpha2Code, coordinates, name, capital, area) {
       $mdDialog.show({
          parent: angular.element(document.body),
          targetEvent: $event,
@@ -122,6 +123,7 @@ angular.module('angularCountriesApp')
           $scope.coordinates = coordinates[0] + ' ' + coordinates[1];
           $scope.country = name + ', ' + capital;
           $scope.alpha2Code = alpha2Code;
+          $scope.area = area;
           $scope.mapStyle = [{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#d3d3d3"}]},{"featureType":"transit","stylers":[{"color":"#808080"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#b3b3b3"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#d7d7d7"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ebebeb"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#696969"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#737373"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#d6d6d6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#dadada"}]}];
           $scope.closeDialog = function() {
             $mdDialog.hide();
@@ -129,8 +131,9 @@ angular.module('angularCountriesApp')
         },
         onShowing: function($scope) {
           NgMap.getMap().then(function(map) {
+            var zoom = ($scope.area < 1000) ? 10 : ($scope.area > 2000000) ? 3 : 4 ;
             $scope.addFusionTablesLayerNgMap(map);
-            $scope.initializeNgMap(map);
+            $scope.initializeNgMap(map, zoom);
           });
         },
         onRemoving: function() {
