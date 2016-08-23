@@ -35,7 +35,7 @@
   <body ng-app="angularCountriesApp" ng-controller="AppMainCtrl as main" layout="row">
 
     <!-- SIDEBAR STARTS -->
-    <md-sidenav md-component-id="left" md-is-locked-open="true" md-whiteframe="2" class="md-sidenav">
+    <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-xs')" md-whiteframe="2" class="md-sidenav">
         <div ng-include="'views/includes/header.html'"></div>
       <md-content role="nagivation" flex>
         <div ng-include="'views/includes/menu.html'"></div>
@@ -51,7 +51,7 @@
       <!-- <md-progress-linear md-mode="determinate" class="md-warn" value="90"></md-progress-linear> -->
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-include="'views/includes/filters.html'"></div>
-        <div ng-view layout-padding></div>
+        <div ng-view style="min-height:600px;"></div>
         <div ng-include="'views/includes/footer.html'"></div>
       </md-content>
     </div>

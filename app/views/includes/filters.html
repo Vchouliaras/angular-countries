@@ -1,5 +1,5 @@
-<div layout="row" layout-padding layout-align="start center" class="content-filters">
- <md-input-container flex="20" ng-show="!SearchInput.appear">
+<div layout-sm="column" layout-xs="column" layout="row" layout-align-xs="center start" layout-align-sm="center start" layout-align="start center" layout-margin layout-padding class="content-filters">
+ <md-input-container flex-xs="100" flex-sm="100" flex="20" ng-show="!SearchInput.appear" class="md-input-container">
     <label>Filter by Currency</label>
     <md-select ng-model="selectedCurrencyFilter"
                ng-change="selectedCurrencyFilterChanged(selectedCurrencyFilter)"
@@ -18,24 +18,24 @@
       </md-optgroup>
     </md-select>
   </md-input-container>
-  <md-input-container flex="20" ng-show="!SearchInput.appear">
+  <md-input-container flex-xs="100" flex-sm="100" flex="20" ng-show="!SearchInput.appear" class="md-input-container">
       <label>Sort By Population</label>
       <md-select ng-model="selectedPopulationFilter" ng-change="selectedPopulationFilterChanged(selectedPopulationFilter)">
           <md-option ng-value="filter | spacesToDashes" ng-repeat="filter in Populationfilters" value="{{filter}}">{{filter}}</md-option>
       </md-select>
   </md-input-container>
-  <md-input-container flex="20" ng-show="!SearchInput.appear">
+  <md-input-container flex-xs="100" flex-sm="100" flex="20" ng-show="!SearchInput.appear" class="md-input-container">
       <label>Sort By Area</label>
       <md-select ng-model="selectedAreaFilter" ng-change="selectedAreaFilterChanged(selectedAreaFilter)">
           <md-option ng-value="filter | spacesToDashes" ng-repeat="filter in Areafilters" value="{{filter}}">{{filter}}</md-option>
       </md-select>
   </md-input-container>
-  <md-input-container class="search-input-field-container" ng-show="SearchInput.appear">
+  <md-input-container flex="100" class="search-input-field-container" ng-show="SearchInput.appear">
     <input ng-keyup="selectedSearchInputTerm(inputSearchTerm)" ng-model="inputSearchTerm" type="text" placeholder="Search for Country or Capital">
   </md-input-container>
-  <md-input-container class="search-input-icon-container">
+  <span class="search-input-icon-container">
     <md-icon md-svg-src="/images/svg-icons/ic_clear_black_24px.svg" ng-show="SearchInput.appear" ng-click="toggleSearch()"></md-icon>
     <md-icon md-svg-src="/images/svg-icons/ic_search_black_24px.svg" ng-show="!SearchInput.appear" ng-click="toggleSearch()"></md-icon>
-  </md-input-container>
+  </span>
 </div>
 

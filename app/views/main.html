@@ -1,5 +1,5 @@
-<div layout="row" layout-align="none center" layout-wrap class="countries-cards">
-  <md-card ng-repeat="country in Countries" flex="none" class="card">
+<div class="countries-cards" layout-wrap layout="row" layout-align-xs="center center" layout-align="center center">
+  <md-card ng-repeat="country in Countries" class="card" ng-style="repsonsiveFlex">
    <md-card-header class="md-card-header">
       <h4 class="md-headline">{{ country.name }}</h4>
    </md-card-header>

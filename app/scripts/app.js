@@ -68,8 +68,7 @@ angular
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
   .run(['$rootScope', '$window', function($rootScope, $window) {
     $rootScope.$on('$routeChangeSuccess', function() {
-      console.log('run');
-      $window.scrollTo(0,0);
+      // angular.element('md-content').scrollTo(0,0);
     });
   }])
   .config(['$mdThemingProvider', function($mdThemingProvider){
@@ -131,8 +130,8 @@ angular
       return (input !== undefined) ? angular.lowercase(input).replace(/[\s]/g, '_') : '';
     };
   })
-  .controller('AppMainCtrl',['$rootScope','$scope','$filter',
-    function ($rootScope, $scope, $filter) {
+  .controller('AppMainCtrl',['$rootScope','$scope','$filter', '$mdSidenav',
+    function ($rootScope, $scope, $filter, $mdSidenav) {
 
     // Register filters.
     var orderByFilter = $filter('orderBy');
@@ -207,6 +206,11 @@ angular
         });
         $rootScope.Countries = tempArr;
       }
+    };
+
+    // Toggle Sidebar for small screens.
+    $scope.toggleSideBar = function() {
+      $mdSidenav('left').toggle();
     };
 
     $scope.menu = [{

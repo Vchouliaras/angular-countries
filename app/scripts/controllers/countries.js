@@ -8,14 +8,13 @@
  * Controller of the angularCountriesApp
  */
 angular.module('angularCountriesApp')
-  .controller('CountriesCtrl', ['$rootScope', '$scope','$log','CountriesApi','$routeParams', 'COUNTRIES_REST_ENDPOINT','CountriesAvailableImages','$q','$mdDialog','NgMap',
-    function($rootScope, $scope, $log, CountriesApi, $routeParams,COUNTRIES_REST_ENDPOINT, CountriesAvailableImages, $q, $mdDialog, NgMap) {
+  .controller('CountriesCtrl', ['$rootScope', '$scope','$log','CountriesApi','$routeParams', 'COUNTRIES_REST_ENDPOINT','CountriesAvailableImages','$q','$mdDialog','NgMap','$mdMedia',
+    function($rootScope, $scope, $log, CountriesApi, $routeParams,COUNTRIES_REST_ENDPOINT, CountriesAvailableImages, $q, $mdDialog, NgMap, $mdMedia) {
 
     var fn = null;
     var parameter = null;
     var Countries = [];
     var Currencyfilters = [];
-    // var fusionTableLayer = null;
 
     if ($routeParams.region) {
       fn = 'getRegion';
@@ -143,4 +142,28 @@ angular.module('angularCountriesApp')
         },
       });
     };
+
+
+    // Track different media queries with $mdMedia service.
+    $scope.$watch(
+      function() {
+        return $mdMedia('xs') ? 'xs' :
+          $mdMedia('sm') ? 'sm' : 'lg';
+      },
+      function(breakpoint) {
+        console.log(breakpoint);
+        if (breakpoint === 'xs') {
+          $scope.repsonsiveFlex = {
+            'flex': '0 1 300px'
+          };
+        }
+        else {
+          $scope.repsonsiveFlex = {
+            'flex': '0 1 265px'
+          };
+        }
+      }
+    );
+
+
   }]);
