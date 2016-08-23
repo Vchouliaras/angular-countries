@@ -1,6 +1,6 @@
 ## Angular Countries
 
-This project has an experimental purpose. It was developed to familiarize myself with Angular (v1.5.8).
+This project has an experimental purpose. It was developed to familiarize myself with Angular (v1.5.8).  
 You can see the project live here https://ngcountries.vchouliaras.com.
 
 ### Info
@@ -15,8 +15,8 @@ Run `grunt` for building and `grunt serve` for preview.
 
 Running `grunt test` will run the unit tests with karma.
 
----
+
 ## License
 
-(c) 2016 Vasileios Chouliaras
+(c) 2016 Vasileios Chouliaras  
 Licensed under the MIT license.
