@@ -151,7 +151,6 @@ angular.module('angularCountriesApp')
           $mdMedia('sm') ? 'sm' : 'lg';
       },
       function(breakpoint) {
-        console.log(breakpoint);
         if (breakpoint === 'xs') {
           $scope.repsonsiveFlex = {
             'flex': '0 1 300px'
