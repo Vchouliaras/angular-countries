@@ -1,4 +1,7 @@
-<div class="countries-cards" layout-wrap layout="row" layout-align-xs="center center" layout-align="center center">
+<div layout="row" ng-show="CircularBar" layout-sm="column" layout-padding layout-align="center center">
+  <md-progress-circular md-mode="indeterminate" md-diameter="70"></md-progress-circular>
+</div>
+<div class="countries-cards" ng-show="!CircularBar" layout-wrap layout="row" layout-align-xs="center center" layout-align="center center">
   <md-card ng-repeat="country in Countries" class="card" ng-style="repsonsiveFlex">
    <md-card-header class="md-card-header">
       <h4 class="md-headline">{{ country.name }}</h4>

@@ -52,7 +52,7 @@
       <!-- <md-progress-linear md-mode="determinate" class="md-warn" value="90"></md-progress-linear> -->
       <md-content id="main-content" class="md-no-momentum md-content">
         <div ng-include="'views/includes/filters.html'"></div>
-        <div ng-view style="min-height:600px;"></div>
+        <div ng-view style="min-height:600px;" class="fade-in"></div>
         <div ng-include="'views/includes/footer.html'"></div>
       </md-content>
     </div>
@@ -76,8 +76,11 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/services/services.js"></script>
+    <script src="scripts/filters/filters.js"></script>
     <script src="scripts/directives/menu-toggle.js"></script>
     <script src="scripts/directives/menu-link.js"></script>
+    <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/countries.js"></script>
     <!-- endbuild -->
 </body>
