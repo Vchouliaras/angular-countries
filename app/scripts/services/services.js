@@ -61,8 +61,9 @@ services
           'url' : getRouteParametersUrl(parameter),
         });
 
-        // Resolve both promise.
-        $q.all([http, CountriesHelper.CountriesAvailableImages()]).then(doneCallback, failCallback);
+        // Resolve both promises.
+        $q.all([http, CountriesHelper.CountriesAvailableImages()])
+          .then(doneCallback, failCallback);
 
         return defer.promise;
       };
