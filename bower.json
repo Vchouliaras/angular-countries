@@ -10,6 +10,7 @@
     "angular-messages": "1.5.8",
     "angular-material": "^1.0.9",
     "angular-bindonce": "^0.3.3",
+    "angularytics": "^0.4.0",
     "ngmap": "^1.17.3"
   },
   "devDependencies": {

@@ -9,15 +9,23 @@
  * Main module of the application.
  */
 
-angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMaterial','ngMap','pasvaz.bindonce', 'ngCountries.services', 'ngCountries.filters'])
+angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMaterial','angularytics', 'ngMap','pasvaz.bindonce', 'ngCountries.services', 'ngCountries.filters'])
 
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
 
-  .run(['$rootScope', function($rootScope) {
+  .run(['$rootScope','Angularytics', function($rootScope, Angularytics) {
+
+    Angularytics.init();
+
     $rootScope.$on('$routeChangeSuccess', function() {
       document.getElementById('main-content')
         .scrollTop = 0;
     });
+  }])
+
+  .config(['AngularyticsProvider', function(AngularyticsProvider) {
+    AngularyticsProvider
+      .setEventHandlers(['Console', 'GoogleUniversal']);
   }])
 
   .config(['$mdThemingProvider', function($mdThemingProvider){
