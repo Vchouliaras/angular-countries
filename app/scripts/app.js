@@ -13,12 +13,10 @@ angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMat
 
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
 
-  .run(['$rootScope', '$window','$cacheFactory', function($rootScope, $window, $cacheFactory) {
+  .run(['$rootScope', function($rootScope) {
     $rootScope.$on('$routeChangeSuccess', function() {
-      // debugger;
-      // var cache = $cacheFactory.get('$http');
-      // cache.removeAll();
-      // angular.element('md-content').scrollTo(0,0);
+      document.getElementById('main-content')
+        .scrollTop = 0;
     });
   }])
 
