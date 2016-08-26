@@ -32,10 +32,10 @@ angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMat
     $compileProvider.debugInfoEnabled(false);
   }])
 
-  // .config(['$locationProvider', function($locationProvider){
-  //   //Activate HTML5 Mode.
-  //   // $locationProvider.html5Mode(true);
-  // }])
+  .config(['$locationProvider', function($locationProvider){
+    //Activate HTML5 Mode.
+    $locationProvider.html5Mode(true);
+  }])
 
   .config(['$routeProvider', function($routeProvider){
       var originalWhen = $routeProvider.when.bind($routeProvider);
@@ -58,13 +58,6 @@ angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMat
           templateUrl: 'views/main.html',
           controller: 'CountriesCtrl',
           controllerAs: 'countries',
-          // resolve: {
-          //   CountriesAvailableImages: ['CountriesHelper', function(CountriesHelper) {
-          //     return CountriesHelper.CountriesAvailableImagesHelper().success(function(response) {
-          //       return response;
-          //     });
-          //   }]
-          // }
         })
         .otherwise({
           redirectTo: '/'
