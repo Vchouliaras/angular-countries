@@ -2,17 +2,17 @@
   <md-progress-circular md-mode="indeterminate" md-diameter="70"></md-progress-circular>
 </div>
 <div class="countries-cards" ng-show="!CircularBar" layout-wrap layout="row" layout-align-xs="center center" layout-align="center center">
-  <md-card ng-repeat="country in Countries" class="card" ng-style="repsonsiveFlex">
+  <md-card bindonce ng-repeat="country in Countries" class="card" ng-style="repsonsiveFlex">
    <md-card-header class="md-card-header">
-      <h4 class="md-headline">{{ country.name }}</h4>
+      <h4 class="md-headline" bo-text=country.name></h4>
    </md-card-header>
    <md-card-content class="md-card-content">
-      <img width="265" ng-src="images/flags/{{ country.alpha2Code | lowercase }}.png" class="md-card-image" alt="{{ country.name }}">
+      <img width="265" bo-src-i="images/flags/{{ country.alpha2Code | lowercase }}.png" class="md-card-image" bo-alt="country.name">
    </md-card-content>
    <md-card-actions layout="row" layout-align="end center" class="md-card-actions">
      <md-button class="on-map" ng-click="showOnMapDialog($event, country.alpha2Code, country.latlng, country.name, country.capital, country.area)"><md-icon md-svg-src="/images/svg-icons/ic_place_black_24px.svg"></md-icon> ON MAP</md-button>
      <md-card-icon-actions>
-        <md-button ng-href="https://en.wikipedia.org/wiki/{{country.name}}" target="_blank" title="{{country.name}} in Wikipedia" class="md-icon-button" aria-label="icon">
+        <md-button bo-href-i="https://en.wikipedia.org/wiki/{{country.name}}" target="_blank" bo-title="country.name + ' in Wikipedia'" class="md-icon-button" aria-label="icon">
           <md-icon md-svg-src="/images/svg-icons/ic_school_black_24px.svg"></md-icon>
         </md-button>
      </md-card-icon-actions>

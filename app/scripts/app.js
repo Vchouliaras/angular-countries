@@ -9,12 +9,15 @@
  * Main module of the application.
  */
 
-angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMaterial','ngMap','ngCountries.services', 'ngCountries.filters'])
+angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMaterial','ngMap','pasvaz.bindonce', 'ngCountries.services', 'ngCountries.filters'])
 
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
 
-  .run(['$rootScope', '$window', function($rootScope, $window) {
+  .run(['$rootScope', '$window','$cacheFactory', function($rootScope, $window, $cacheFactory) {
     $rootScope.$on('$routeChangeSuccess', function() {
+      // debugger;
+      // var cache = $cacheFactory.get('$http');
+      // cache.removeAll();
       // angular.element('md-content').scrollTo(0,0);
     });
   }])

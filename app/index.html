@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="angularCountriesApp" >
   <head>
     <meta charset="utf-8">
     <title>An Angular app for World countries</title>
@@ -34,7 +34,7 @@
     <!-- endbuild -->
   </head>
 
-  <body ng-app="angularCountriesApp" ng-controller="AppMainCtrl as main" layout="row">
+  <body ng-controller="AppMainCtrl as main" layout="row">
 
     <!-- SIDEBAR STARTS -->
     <md-sidenav md-component-id="left" md-is-locked-open="$mdMedia('gt-xs')" md-whiteframe="2" class="md-sidenav">
@@ -71,6 +71,7 @@
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-bindonce/bindonce.js"></script>
     <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
