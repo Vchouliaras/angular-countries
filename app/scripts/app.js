@@ -51,7 +51,7 @@ angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMat
   }])
 
   .config(['$routeProvider','$httpProvider',
-    function ($routeProvider, $httpProvider) {
+    function ($routeProvider) {
       // Configure route provider.
       $routeProvider
         .when(['/', '/region/:region'], {
