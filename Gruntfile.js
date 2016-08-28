@@ -16,7 +16,8 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    cdnify: 'grunt-google-cdn',
+    'string-replace': 'grunt-string-replace',
   });
 
   // Configurable paths for the application
@@ -30,6 +31,29 @@ module.exports = function (grunt) {
 
     // Project settings
     yeoman: appConfig,
+
+
+    'string-replace': {
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/index.html': ['<%= yeoman.app %>/index.html']
+        },
+        options: {
+          replacements: [
+            {
+              pattern: /\/maps\/api\/js/gi,
+              replacement: '/maps/api/js?apikey=AIzaSyBnWM_x5M0d0ajva8XUv-zgCcOxpJjFLz8'
+            },
+            {
+              pattern: /'UA-\d*-\d*'/gi,
+              replacement: '\'UA-38633711-3\''
+            }
+          ]
+        }
+      }
+    },
+
+
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -498,7 +522,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'string-replace',
+    'htmlmin',
   ]);
 
   grunt.registerTask('default', [
