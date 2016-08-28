@@ -42,7 +42,7 @@ module.exports = function (grunt) {
           replacements: [
             {
               pattern: /\/maps\/api\/js/gi,
-              replacement: '/maps/api/js?apikey=AIzaSyBnWM_x5M0d0ajva8XUv-zgCcOxpJjFLz8'
+              replacement: '/maps/api/js?key=AIzaSyBnWM_x5M0d0ajva8XUv-zgCcOxpJjFLz8'
             },
             {
               pattern: /'UA-\d*-\d*'/gi,
