@@ -1,23 +1,28 @@
 'use strict';
 
+// Here we define a test suite.
 describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
+  var MainCtrl, scope;
+
+  // Load the controller's module.
   beforeEach(module('angularCountriesApp'));
 
-  var MainCtrl,
-    scope;
-
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+  // Load the controller.
+  beforeEach(inject(function ($controller) {
+    scope = {};
+    MainCtrl = $controller('AppMainCtrl', {
       $scope: scope
-      // place here mocked dependencies
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(MainCtrl.awesomeThings.length).toBe(3);
+  it('The Search input should appear on click', function(){
+    var default_value = scope.SearchInput;
+    scope.toggleSearch();
+    var actual_value = scope.SearchInput;
+    expect(default_value.appear).toBe(actual_value.appear);
   });
+
+
+
 });
