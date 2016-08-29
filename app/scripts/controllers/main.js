@@ -25,11 +25,6 @@ angular.module('angularCountriesApp')
           return (expression.search(value.toLowerCase().trim()) !== -1) ? true : false;
         });
     };
-    // Toggle input search field.
-    $scope.SearchInput = {appear: false};
-    $scope.toggleSearch = function() {
-      $scope.SearchInput.appear = (!$scope.SearchInput.appear) ? true : false;
-    };
 
     $scope.Populationfilters = ['From High to Low', 'From Low to High'];
     // When a Population filter is selected.
