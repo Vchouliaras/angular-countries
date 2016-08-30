@@ -21,7 +21,7 @@ describe('Controller: MainCtrl', function () {
 
   // Populate scope.
   beforeEach(function(){
-    scope.Countries = Countries;
+    scope.Countries = scope.CountriesTemp = Countries;
   });
 
   it('The Search input should appear on click', function(){
@@ -32,23 +32,22 @@ describe('Controller: MainCtrl', function () {
 
   // @TODO need to write a custom matcher for more results.
   it('Search should contain \"Greece\" when I search the term \"Gre\"', function() {
-    scope.selectedSearchInputTerm('Gre', scope);
+    scope.selectedSearchInputTerm('Gre');
     expect(scope.Countries[0].name).toContain('Greece');
   });
 
   it('Population filter should sort from High to Low when the corresponding option is selected', function() {
-    scope.selectedPopulationFilterChanged('from_high_to_low', scope);
+    scope.selectedPopulationFilterChanged('from_high_to_low');
     expect(scope.Countries[0].population).toBe(20000000);
   });
 
   it('Area filter should sort from Big to Small when the corresponding option is selected', function() {
-    scope.selectedAreaFilterChanged('from_big_to_small', scope);
+    scope.selectedAreaFilterChanged('from_big_to_small');
     expect(scope.Countries[0].area).toBe(2000);
   });
 
   it('When EUR currency is selected, only countries with corresponding currency should be displayed', function() {
-    scope.selectedCurrencyFilterChanged(["EUR"], scope);
-    console.log(scope.Countries);
+    scope.selectedCurrencyFilterChanged(["EUR"]);
     expect(scope.Countries[0].currencies[0]).toMatch('EUR');
   });
 

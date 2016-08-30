@@ -51,7 +51,6 @@ angular.module('angularCountriesApp')
     // Global Search for Countries and Capitals.
     $scope.selectedSearchInputTerm = function(value) {
       var expression;
-      console.log($scope.CountriesTemp);
       $scope.Countries = filterFilter($scope.CountriesTemp,
         function(item) {
           expression = (item.name + ' ' + item.capital).toLowerCase().trim();
