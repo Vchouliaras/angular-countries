@@ -11,14 +11,14 @@ angular.module('angularCountriesApp')
   .controller('CountriesCtrl', ['$rootScope', '$scope','$log','CountriesApi','$routeParams', 'COUNTRIES_REST_ENDPOINT','$q','$mdDialog','NgMap','$mdMedia',
     function($rootScope, $scope, $log, CountriesApi, $routeParams, COUNTRIES_REST_ENDPOINT, $q, $mdDialog, NgMap, $mdMedia) {
 
-    $scope.CircularBar = true;
+    // Get Countries.
+    $scope.$parent.CircularBar = true;
     CountriesApi.restCountries($routeParams).then(
       function(response) {
-        $scope.CircularBar = false;
-        $rootScope.CountriesTemp = $rootScope.Countries = response.Countries;
-        $rootScope.CurrencyfiltersTemp = $rootScope.Currencyfilters = response.Currencyfilters;
-      }
-      ,function(error) {
+        $scope.$parent.CircularBar = false;
+        $scope.$parent.CountriesTemp = $scope.$parent.Countries = response.Countries;
+        $scope.$parent.CurrencyfiltersTemp = $scope.$parent.Currencyfilters = response.Currencyfilters;
+      },function(error) {
         $log.console(error);
       }
     );
