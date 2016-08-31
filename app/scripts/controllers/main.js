@@ -31,7 +31,7 @@ angular.module('angularCountriesApp')
         $scope.CountriesTemp = $scope.Countries = response.Countries;
         $scope.CurrencyfiltersTemp = $scope.Currencyfilters = response.Currencyfilters;
       },function(error) {
-        $log.console(error);
+        $log.log(error);
       }
     );
 
