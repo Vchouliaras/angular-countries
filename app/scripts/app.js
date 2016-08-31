@@ -13,11 +13,14 @@ angular.module('angularCountriesApp', ['ngAnimate','ngResource','ngRoute','ngMat
 
   .constant('COUNTRIES_REST_ENDPOINT', 'https://restcountries.eu/rest/v1')
 
-  .run(['$rootScope','Angularytics', function($rootScope, Angularytics) {
+  .run(['$rootScope','Angularytics','$mdMedia','$mdSidenav', function($rootScope, Angularytics, $mdMedia, $mdSidenav) {
 
     Angularytics.init();
 
     $rootScope.$on('$routeChangeSuccess', function() {
+      if ($mdMedia('xs') && $mdSidenav('left').isOpen()) {
+        $mdSidenav('left').toggle();
+      }
       document.getElementById('main-content')
         .scrollTop = 0;
     });
