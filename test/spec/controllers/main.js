@@ -37,7 +37,6 @@ describe('Main Controller', function () {
   beforeEach(inject(function ($controller, $rootScope, CountriesApi) {
     scope = $rootScope.$new();
     countriesApi = CountriesApi;
-    console.log(countriesApi);
     MainCtrl = $controller('AppMainCtrl', {
       $scope: scope
     });
