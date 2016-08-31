@@ -1,9 +1,11 @@
 'use strict';
 
 // Here we define a test suite.
-describe('Controller: MainCtrl', function () {
+describe('Main Controller', function () {
 
-  var MainCtrl, scope;
+  var MainCtrl, scope, passPromise, countriesApi;
+
+
   var Countries = [
     {name : 'Germany',capital: 'Berlin', currencies:['EUR'], population: 20000000, area: 2000},
     {name: 'Greece', capital: 'Athens', currencies:['USD'], population: 10000000, area: 1000}];
@@ -11,11 +13,33 @@ describe('Controller: MainCtrl', function () {
   // Load the controller's module.
   beforeEach(module('angularCountriesApp'));
 
+  // Override a service.
+  beforeEach(module(function($provide) {
+    $provide.factory('CountriesApi', function($q) {
+      var restCountries = jasmine.createSpy('restCountries').and.callFake(function(parameter) {
+        if (passPromise && parameter) {
+          return $q.resolve(Countries);
+        }
+        else {
+          return $q.reject('Countries could not be loaded.');
+        }
+      });
+
+      return {
+        restCountries: function(parameter) {
+          return restCountries(parameter);
+        }
+      };
+    });
+  }));
+
   // Load the controller.
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, CountriesApi) {
     scope = $rootScope.$new();
+    countriesApi = CountriesApi;
+    console.log(countriesApi);
     MainCtrl = $controller('AppMainCtrl', {
-      $scope: scope,
+      $scope: scope
     });
   }));
 
@@ -24,31 +48,45 @@ describe('Controller: MainCtrl', function () {
     scope.Countries = scope.CountriesTemp = Countries;
   });
 
-  it('The Search input should appear on click', function(){
+  it('should load REST Countries', function() {
+    var data;
+    passPromise = true;
+    countriesApi.restCountries({region: 'africa'})
+      .then(function(response) {
+        data = response;
+      });
+
+    // Trigger digest
+    // to get updated values.
+    scope.$digest();
+
+    expect(data).toEqual(Countries);
+  });
+
+  it('should appear the search input on click', function(){
     scope.SearchInput.appear = false;
     scope.toggleSearch();
     expect(scope.SearchInput.appear).toBe(true);
   });
 
   // @TODO need to write a custom matcher for more results.
-  it('Search should contain \"Greece\" when I search the term \"Gre\"', function() {
+  it('should contain \"Greece\" when I search the term \"Gre\" in search input', function() {
     scope.selectedSearchInputTerm('Gre');
     expect(scope.Countries[0].name).toContain('Greece');
   });
 
-  it('Population filter should sort from High to Low when the corresponding option is selected', function() {
+  it('should sort from High to Low when the corresponding option is selected, in population filter', function() {
     scope.selectedPopulationFilterChanged('from_high_to_low');
     expect(scope.Countries[0].population).toBe(20000000);
   });
 
-  it('Area filter should sort from Big to Small when the corresponding option is selected', function() {
+  it('should sort from Big to Small when the corresponding option is selected,in area filter', function() {
     scope.selectedAreaFilterChanged('from_big_to_small');
     expect(scope.Countries[0].area).toBe(2000);
   });
 
-  it('When EUR currency is selected, only countries with corresponding currency should be displayed', function() {
+  it('should display countries with the corresponding currencies when EUR is selected, on currencies filter', function() {
     scope.selectedCurrencyFilterChanged(["EUR"]);
     expect(scope.Countries[0].currencies[0]).toMatch('EUR');
   });
-
 });
