@@ -474,6 +474,10 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: false
+      },
+      live : {
+        configFile: 'test/karma.conf.js',
+        singleRun: true
       }
     }
   });
@@ -506,6 +510,15 @@ module.exports = function (grunt) {
     'postcss',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('test:live', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'postcss',
+    'connect:test',
+    'karma:live'
   ]);
 
   grunt.registerTask('build', [
