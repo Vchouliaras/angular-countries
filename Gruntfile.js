@@ -477,7 +477,11 @@ module.exports = function (grunt) {
       },
       live : {
         configFile: 'test/karma.conf.js',
-        singleRun: true
+        singleRun: true,
+        reporters: ['dots', 'junit'],
+        junitReporter: {
+          outputFile: 'ngcountries-test-results.xml'
+        },
       }
     }
   });
