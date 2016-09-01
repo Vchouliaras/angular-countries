@@ -17,7 +17,8 @@ module.exports = function (grunt) {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
-    'string-replace': 'grunt-string-replace'
+    'string-replace': 'grunt-string-replace',
+    protractor: 'grunt-protractor-runner'
   });
 
   // Configurable paths for the application
@@ -32,7 +33,8 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
-
+    // Replace markup in index.html
+    // for local and live enviroments
     'string-replace': {
       dist: {
         files: {
@@ -483,7 +485,26 @@ module.exports = function (grunt) {
           outputFile: 'ngcountries-test-results.xml'
         },
       }
+    },
+
+    protractor: {
+      e2e: {
+        options : {
+          configFile: 'test/protractor.conf.js',
+          noColor: false,
+          keepAlive: true
+        }
+      },
+      debug: {
+        options : {
+          configFile: 'test/protractor.conf.js',
+          noColor: false,
+          keepAlive: true,
+          debug: true
+        }
+      }
     }
+
   });
 
 
@@ -507,7 +528,7 @@ module.exports = function (grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
-  grunt.registerTask('test', [
+  grunt.registerTask('unit-test', [
     'clean:server',
     'wiredep',
     'concurrent:test',
@@ -516,7 +537,11 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('test:live', [
+  grunt.registerTask('e2e-test', [
+    'protractor'
+  ]);
+
+  grunt.registerTask('unit-test:live', [
     'clean:server',
     'wiredep',
     'concurrent:test',
@@ -546,7 +571,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'newer:jscs',
-    'test',
+    'unit-test',
     'build'
   ]);
 };
