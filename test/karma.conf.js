@@ -59,7 +59,8 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-chrome-launcher',
-      'karma-jasmine'
+      'karma-jasmine',
+      'karma-junit-reporter',
     ],
 
     // Continuous Integration mode
