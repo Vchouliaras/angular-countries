@@ -3,3 +3,5 @@
 /.tmp
 /.sass-cache
 /bower_components
+/SeleniumE2ETest
+/PhantomJS_2.1.1_(Linux_0.0.0)
