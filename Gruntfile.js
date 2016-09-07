@@ -18,7 +18,8 @@ module.exports = function (grunt) {
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
     'string-replace': 'grunt-string-replace',
-    protractor: 'grunt-protractor-runner'
+    protractor: 'grunt-protractor-runner',
+    protractor_webdriver: 'grunt-protractor-webdriver'
   });
 
   // Configurable paths for the application
@@ -487,6 +488,15 @@ module.exports = function (grunt) {
       }
     },
 
+    protractor_webdriver: {
+      e2e: {
+        options: {
+          path: '/usr/local/bin/',
+          command: 'webdriver-manager start'
+        }
+      }
+    },
+
     protractor: {
       e2e: {
         options : {
@@ -501,6 +511,13 @@ module.exports = function (grunt) {
           noColor: false,
           keepAlive: true,
           debug: true
+        }
+      },
+      live: {
+        options : {
+          configFile: 'test/protractor.live.conf.js',
+          noColor: false,
+          keepAlive: true
         }
       }
     }
@@ -538,6 +555,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('e2e-test', [
+    'protractor_webdriver',
     'protractor:e2e'
   ]);
 
@@ -548,6 +566,11 @@ module.exports = function (grunt) {
     'postcss',
     'connect:test',
     'karma:live'
+  ]);
+
+  grunt.registerTask('e2e-test:live', [
+    'protractor_webdriver',
+    'protractor:live'
   ]);
 
   grunt.registerTask('build', [

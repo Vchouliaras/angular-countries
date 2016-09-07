@@ -29,4 +29,16 @@ exports.config = {
     includeStackTrace: true,
     defaultTimeoutInterval: 10000
   },
+
+  // Add testing report in xml for jenkins.
+  onPrepare:function() {
+    'use strict';
+    var jasmineReporters = require('jasmine-reporters');
+    jasmine.getEnv().addReporter(
+      new jasmineReporters.JUnitXmlReporter({
+        savePath: 'SeleniumE2ETest/',
+        consolidateAll: true,
+      })
+    );
+  },
 };
