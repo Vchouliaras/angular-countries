@@ -555,6 +555,11 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('e2e-test', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'postcss',
+    'connect:test',
     'protractor_webdriver',
     'protractor:e2e'
   ]);
@@ -569,6 +574,11 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('e2e-test:live', [
+    'clean:server',
+    'wiredep',
+    'concurrent:test',
+    'postcss',
+    'connect:test',
     'protractor_webdriver',
     'protractor:live'
   ]);
